@@ -1,0 +1,48 @@
+Problem:
+
+A "domain model" is pure code implementing a model of the "business domain" an application operates in.
+
+The problem is what we need to keep the "domain model" separate from platform and language specific details.
+
+Using "domain models" automatically solve the platform problem because the "domain model" doesn't depend on any specific GUI's etc.
+
+However it doesn't solve the language problem:
+
+If we write the "domain model" in C++ or Java then we can only use the domain model on those platforms.
+
+Solution:
+
+The goal is to have a "domain model" language "X" that can be compiled to C++, Java and JavaScript.
+
+The idea is that you write the "domain model" in X ensuring that the domain model can be used on ANY current and future platform.
+
+Problem:
+
+Designing a new language (X) is hard. Also, forcing people to learn a new language dramatically reduces the change of the project actually being used.
+
+Solution:
+
+Use (a subset of) Java as X. It makes it easy for people to understand and use and it is high level enough to be easily compiled to C++, Java and JavaScript.
+
+Problem:
+
+How do we write a compiler for X?
+
+Solution:
+
+Write the compiler in Java and make the compiler compile its own source code.
+
+=> no need to write separate test examples (which is tedious/slow).
+=> compiling a real non-trivial program.
+=> the Java compiler will complain if the source is not Java.
+=> only need to implement what is actually used instead of "handling all of Java".
+
+Problem:
+
+How do we add new non-Java syntax?
+
+Solution:
+
+When the X compiler is working, start using X to write the X compiler.
+
+=> you can now add new language features (however the code will no longer be compileable with Java).
